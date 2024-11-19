@@ -99,14 +99,14 @@ def handle_connection():
     choice = var.get()
     if choice == 1:  # Host
         server = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-        server.bind(("127.0.0.1", 9999))  # Bind to localhost for local testing
+        server.bind(("ip address", port number))  # Bind to localhost for local testing
         server.listen()
         client, _ = server.accept()
         client.send(public.save_pkcs1("PEM"))
         public_partner = rsa.PublicKey.load_pkcs1(client.recv(1024))
     elif choice == 2:  # Connect
         client = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-        client.connect(("127.0.0.1", 9999))  # Connect to localhost for local testing
+        client.connect(("ip address", port number))  # Connect to localhost for local testing
         public_partner = rsa.PublicKey.load_pkcs1(client.recv(1024))
         client.send(public.save_pkcs1("PEM"))
 
